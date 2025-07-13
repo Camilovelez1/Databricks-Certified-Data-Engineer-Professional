@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality-check:
-    name: Ruff and mypy checks (notebooks too)
+    name: Ruff and mypy checks (including notebooks)
     runs-on: ubuntu-latest
 
     steps:
@@ -21,12 +21,10 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
-      - name: Run Ruff via nbqa (excluding problematic files)
-        run: |
-          find . -name "*.ipynb" ! -name "* *" -exec nbqa ruff {} +
+      - name: Run Ruff via nbqa
+        run: nbqa ruff .
 
       - name: Run mypy via nbqa
         run: nbqa mypy . --exclude tests
