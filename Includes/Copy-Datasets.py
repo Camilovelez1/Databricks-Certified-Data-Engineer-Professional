@@ -262,11 +262,3 @@ db_name = "engineer_professional_databricks"
 bookstore = CourseDataset(data_source_uri, dataset_bookstore, checkpoint_path, data_catalog, db_name)
 bookstore.download_dataset()
 bookstore.create_database()
-
-# COMMAND ----------
-
-#bookstore.clean_up()
-
-# COMMAND ----------
-
-
