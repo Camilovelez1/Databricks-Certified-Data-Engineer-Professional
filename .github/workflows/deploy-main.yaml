@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality-check:
-    name: Ruff and mypy checks
+    name: Ruff and mypy checks (including notebooks)
     runs-on: ubuntu-latest
 
     steps:
@@ -20,11 +20,11 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install PDM and dependencies
-        run: pip install requirements.txt
+      - name: Install dependencies from requirements.txt
+        run: pip install -r requirements.txt
 
-      - name: Lint with Ruff
-        run: ruff check .
+      - name: Run Ruff on code and notebooks
+        run: nbqa ruff .
 
-      - name: Type check with mypy + pyspark-stubs
-        run: mypy . --exclude tests
+      - name: Run mypy on code and notebooks
+        run: nbqa mypy . --exclude tests
